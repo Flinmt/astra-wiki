@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Astra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/wiki.css">
+  <link rel="stylesheet" href="styles/web.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="astra-engine astra-wiki">
+  <header class="window-header">
+    <button type="button" class="astra-web__menu" data-action="toggleMenu" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 4h11M2.5 8h11M2.5 12h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg></button>
+    <h1 class="window-title" data-web-title></h1>
+    <div class="astra-web__langs" role="group" data-web-langs></div>
+  </header>
+  <div class="window-content" data-web-content></div>
+</body>
+</html>

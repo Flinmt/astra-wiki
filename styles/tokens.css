@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap");
+
+.astra-engine {
+  --astra-fundo-app: #0b0d0e;
+  --astra-janela-topo: #151819;
+  --astra-janela-base: #0f1213;
+  --astra-superficie-baixa: #0d1011;
+  --astra-superficie-campo: #0b0e0f;
+  --astra-superficie-elevada: #121617;
+  --astra-superficie-inativa: #111415;
+  --astra-superficie-ativa: #1a1f20;
+  --astra-superficie-hover: #1b1f20;
+  --astra-borda-janela: #33383a;
+  --astra-borda-sutil: #2a2f30;
+  --astra-borda: #3a3f40;
+  --astra-borda-campo: #4a5052;
+  --astra-texto-titulo: #f1eee6;
+  --astra-texto-campo: #d6d8d3;
+  --astra-texto-corpo: #c4c7c1;
+  --astra-texto-base: #a9ada8;
+  --astra-texto-secundario: #8d918c;
+  --astra-texto-apagado: #6f746f;
+  --astra-texto-desativado: #4c5152;
+  --astra-acento: var(--color-text-accent, #ee9b3a);
+  --astra-cumprido: var(--color-level-success, #26b231);
+  --astra-cumprido-borda: var(--color-level-success-border, #1b8f23);
+  --astra-nao-cumprido: var(--color-level-error, #ce0707);
+  --astra-nao-cumprido-borda: var(--color-level-error-border, #750003);
+  --astra-nao-cumprido-texto: color-mix(in srgb, var(--astra-nao-cumprido) 60%, #ffffff);
+  --astra-aviso: var(--color-level-warning, #ee9b3a);
+  --astra-info: var(--color-level-info, #59a1f6);
+  --astra-cat-fisico: #8c2636;
+  --astra-cat-fisico-texto: #b5606c;
+  --astra-cat-espiritual: #2b7782;
+  --astra-cat-espiritual-texto: #5fa3ad;
+  --astra-fonte-titulo: "Cinzel", serif;
+  --astra-fonte-numero: var(--font-body, "Signika"), sans-serif;
+  --astra-fonte-corpo: var(--font-body, "Signika"), sans-serif;
+  --astra-canto-janela: 8px;
+  --astra-canto-painel: 6px;
+  --astra-canto-controle: 4px;
+  --astra-canto-pilula: 16px;
+  --astra-margem-lateral: 22px;
+  --astra-rodape-altura: 52px;
+}
+
+.astra-engine button,
+.astra-engine input,
+.astra-engine select,
+.astra-engine textarea {
+  min-width: 0;
+  min-height: 0;
+  box-shadow: none;
+}
+
+.astra-engine button > svg,
+.astra-engine button > img {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.astra-engine .astra-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--astra-borda) transparent;
+}
+
+.astra-engine .astra-accent-stroke {
+  stroke: var(--acc);
+}
+
+.astra-engine .astra-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
