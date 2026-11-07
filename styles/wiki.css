@@ -1,0 +1,757 @@
+.astra-engine.astra-wiki {
+  min-width: 640px;
+  min-height: 420px;
+  border: 1px solid var(--astra-borda-janela);
+  border-radius: var(--astra-canto-janela);
+  background: var(--astra-janela-base);
+  box-shadow: 0 20px 44px -12px rgba(0, 0, 0, 0.7);
+}
+
+.astra-engine.astra-wiki .window-header {
+  border-bottom: 1px solid var(--astra-borda-sutil);
+  background: var(--astra-janela-topo);
+  font-family: var(--astra-fonte-titulo);
+  color: #f3ad55;
+}
+
+.astra-engine.astra-wiki .window-content {
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--astra-janela-topo) 0%, var(--astra-janela-base) 100%);
+  font-family: var(--astra-fonte-corpo);
+  color: var(--astra-texto-corpo);
+}
+
+.astra-engine .astra-wiki__caption {
+  margin: 0;
+  border: 0;
+  font-family: var(--astra-fonte-corpo);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--astra-texto-secundario);
+}
+
+/* Coluna da esquerda: busca e índice */
+
+.astra-engine .astra-wiki__search {
+  grid-column: 1;
+  grid-row: 1;
+  padding: 12px 12px 10px;
+  border-right: 1px solid var(--astra-borda-sutil);
+  background: var(--astra-superficie-baixa);
+}
+
+.astra-engine .astra-wiki__field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--astra-texto-apagado);
+}
+
+.astra-engine .astra-wiki__field > svg {
+  position: absolute;
+  left: 10px;
+  pointer-events: none;
+}
+
+.astra-engine .astra-wiki__field input {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px 0 30px;
+  border: 1px solid var(--astra-borda-campo);
+  border-radius: var(--astra-canto-controle);
+  background: var(--astra-superficie-campo);
+  font-family: var(--astra-fonte-corpo);
+  font-size: 13px;
+  color: var(--astra-texto-campo);
+}
+
+.astra-engine .astra-wiki__field input::placeholder {
+  color: var(--astra-texto-apagado);
+}
+
+.astra-engine .astra-wiki__field input:focus {
+  border-color: var(--astra-acento);
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--astra-acento) 22%, transparent);
+}
+
+.astra-engine .astra-wiki__nav {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 8px 16px;
+  border-right: 1px solid var(--astra-borda-sutil);
+  background: var(--astra-superficie-baixa);
+}
+
+.astra-engine .astra-wiki__tree,
+.astra-engine .astra-wiki__results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.astra-engine .astra-wiki__node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--astra-canto-controle);
+}
+
+.astra-engine .astra-wiki__node.is-root:not(:first-child) {
+  margin-top: 6px;
+}
+
+.astra-engine .astra-wiki__node-link {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 6px 28px 6px calc(10px + var(--depth) * 14px);
+  border: 0;
+  border-radius: var(--astra-canto-controle);
+  background: transparent;
+  font-family: var(--astra-fonte-corpo);
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: left;
+  color: var(--astra-texto-base);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__node.is-root > .astra-wiki__node-link {
+  font-weight: 600;
+  color: var(--astra-texto-corpo);
+}
+
+.astra-engine .astra-wiki__node-link.is-group {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--astra-texto-secundario);
+}
+
+.astra-engine .astra-wiki__node-link:hover {
+  background: var(--astra-superficie-hover);
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__node.is-active > .astra-wiki__node-link {
+  background: #1a1712;
+  box-shadow: inset 2px 0 0 var(--astra-acento);
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__node-link:focus-visible,
+.astra-engine .astra-wiki__toggle:focus-visible,
+.astra-engine .astra-wiki__result:focus-visible,
+.astra-engine .astra-wiki__main button:focus-visible,
+.astra-engine .astra-wiki__content a:focus-visible {
+  outline: 2px solid var(--astra-acento);
+  outline-offset: -2px;
+}
+
+.astra-engine .astra-wiki__toggle {
+  position: absolute;
+  right: 2px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--astra-canto-controle);
+  background: transparent;
+  color: var(--astra-texto-apagado);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__toggle:hover {
+  color: var(--astra-acento);
+}
+
+.astra-engine .astra-wiki__toggle svg {
+  transition: transform 120ms ease;
+}
+
+.astra-engine .astra-wiki__toggle[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+.astra-engine .astra-wiki__nav-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 8px;
+}
+
+.astra-engine .astra-wiki__clear {
+  width: auto;
+  height: 20px;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid var(--astra-borda);
+  border-radius: var(--astra-canto-controle);
+  background: transparent;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--astra-texto-base);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__clear:hover {
+  border-color: var(--astra-acento);
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__result {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  width: 100%;
+  height: auto;
+  margin: 0 0 2px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--astra-canto-controle);
+  background: transparent;
+  font-family: var(--astra-fonte-corpo);
+  text-align: left;
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__result:hover {
+  background: var(--astra-superficie-hover);
+}
+
+.astra-engine .astra-wiki__result-context {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--astra-texto-apagado);
+}
+
+.astra-engine .astra-wiki__result-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__result-section {
+  font-weight: 400;
+  color: var(--astra-texto-base);
+}
+
+.astra-engine .astra-wiki__result-snippet {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--astra-texto-secundario);
+}
+
+.astra-engine .astra-wiki__nav mark {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--astra-acento) 22%, transparent);
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__empty {
+  padding: 16px 6px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--astra-texto-apagado);
+}
+
+/* Coluna principal */
+
+.astra-engine .astra-wiki__main {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.astra-engine .astra-wiki__bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 54px;
+  padding: 0 var(--astra-margem-lateral);
+  border-bottom: 1px solid var(--astra-borda-sutil);
+}
+
+.astra-engine .astra-wiki__history {
+  display: flex;
+  gap: 4px;
+}
+
+.astra-engine .astra-wiki__history button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--astra-borda);
+  border-radius: var(--astra-canto-controle);
+  background: var(--astra-superficie-elevada);
+  color: var(--astra-texto-base);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__history button:hover:not(:disabled) {
+  border-color: var(--astra-acento);
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__history button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.astra-engine .astra-wiki__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  color: var(--astra-texto-secundario);
+}
+
+.astra-engine .astra-wiki__crumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.astra-engine .astra-wiki__crumbs li + li::before {
+  content: "›";
+  margin: 0 7px;
+  color: var(--astra-texto-desativado);
+}
+
+.astra-engine .astra-wiki__crumbs button {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--astra-fonte-corpo);
+  font-size: 12px;
+  color: var(--astra-texto-secundario);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__crumbs button:hover {
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__crumbs [aria-current="page"] {
+  color: var(--astra-texto-corpo);
+}
+
+.astra-engine .astra-wiki__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  container-type: inline-size;
+}
+
+.astra-engine .astra-wiki__layout {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 26px 34px;
+}
+
+.astra-engine .astra-wiki__eyebrow {
+  margin: 0 0 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--astra-acento);
+}
+
+.astra-engine .astra-wiki__title {
+  margin: 0;
+  border: 0;
+  font-family: var(--astra-fonte-titulo);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__rule {
+  height: 1px;
+  margin: 14px 0 20px;
+  background: linear-gradient(90deg, var(--astra-acento) 0, color-mix(in srgb, var(--astra-acento) 40%, transparent) 64px, var(--astra-borda-sutil) 64px, transparent);
+}
+
+.astra-engine .astra-wiki__notice {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 0 0 18px;
+  padding: 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--astra-info) 40%, transparent);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--astra-info) 8%, transparent);
+  color: var(--astra-texto-base);
+  font-size: 0.85rem;
+}
+
+.astra-engine .astra-wiki__notice i {
+  color: var(--astra-info);
+}
+
+/* Texto das regras */
+
+.astra-engine .astra-wiki__content {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--astra-texto-corpo);
+  text-wrap: pretty;
+}
+
+.astra-engine .astra-wiki__content > :first-child {
+  margin-top: 0;
+}
+
+.astra-engine .astra-wiki__content p {
+  margin: 0 0 0.9em;
+}
+
+.astra-engine .astra-wiki__content strong {
+  font-weight: 700;
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__content em {
+  color: var(--astra-texto-campo);
+}
+
+.astra-engine .astra-wiki__content h2,
+.astra-engine .astra-wiki__content h3,
+.astra-engine .astra-wiki__content h4 {
+  scroll-margin-top: 12px;
+  border: 0;
+  font-family: var(--astra-fonte-corpo);
+  color: var(--astra-texto-titulo);
+  transition: color 600ms ease;
+}
+
+.astra-engine .astra-wiki__content h2 {
+  margin: 1.8em 0 0.6em;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--astra-borda-sutil);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.astra-engine .astra-wiki__content h3 {
+  margin: 1.5em 0 0.45em;
+  font-size: 15.5px;
+  font-weight: 700;
+}
+
+.astra-engine .astra-wiki__content h4 {
+  margin: 1.3em 0 0.4em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--astra-acento);
+}
+
+.astra-engine .astra-wiki__content .is-target {
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__content ul,
+.astra-engine .astra-wiki__content ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+.astra-engine .astra-wiki__content li {
+  margin: 0.25em 0;
+  padding-left: 0.2em;
+}
+
+.astra-engine .astra-wiki__content ul > li::marker {
+  color: var(--astra-acento);
+}
+
+.astra-engine .astra-wiki__content ol > li::marker {
+  font-weight: 700;
+  color: var(--astra-texto-secundario);
+}
+
+.astra-engine .astra-wiki__content blockquote {
+  margin: 0.4em 0 1.2em;
+  padding: 12px 18px;
+  border: 1px solid color-mix(in srgb, var(--astra-acento) 30%, var(--astra-borda-sutil));
+  border-radius: var(--astra-canto-painel);
+  background: color-mix(in srgb, var(--astra-acento) 6%, var(--astra-superficie-elevada));
+  text-align: center;
+}
+
+.astra-engine .astra-wiki__content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.astra-engine .astra-wiki__content blockquote strong {
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__content hr {
+  height: 1px;
+  margin: 1.8em 0;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--astra-borda-janela), transparent);
+}
+
+.astra-engine .astra-wiki__content code {
+  padding: 1px 6px;
+  border: 1px solid var(--astra-borda);
+  border-radius: var(--astra-canto-controle);
+  background: var(--astra-superficie-elevada);
+  font-family: var(--astra-fonte-corpo);
+  font-size: 0.9em;
+  color: var(--astra-texto-titulo);
+  white-space: nowrap;
+}
+
+.astra-engine .astra-wiki__table {
+  margin: 0.4em 0 1.3em;
+  overflow-x: auto;
+  border: 1px solid var(--astra-borda-sutil);
+  border-radius: var(--astra-canto-painel);
+  scrollbar-width: thin;
+  scrollbar-color: var(--astra-borda) transparent;
+}
+
+.astra-engine .astra-wiki__table table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.astra-engine .astra-wiki__table th {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--astra-borda);
+  background: var(--astra-superficie-elevada);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--astra-texto-secundario);
+}
+
+.astra-engine .astra-wiki__table td {
+  padding: 7px 10px;
+  border-top: 1px solid var(--astra-borda-sutil);
+  vertical-align: top;
+  color: var(--astra-texto-corpo);
+}
+
+.astra-engine .astra-wiki__table tbody tr:first-child td {
+  border-top: 0;
+}
+
+.astra-engine .astra-wiki__table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.astra-engine .astra-wiki__table tbody tr:hover {
+  background: var(--astra-superficie-hover);
+}
+
+.astra-engine .astra-wiki__table td:first-child {
+  font-weight: 600;
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__table .is-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.astra-engine .astra-wiki__table .is-center {
+  text-align: center;
+}
+
+/* Links: explícitos com sublinhado cheio, palavras-chave com pontilhado */
+
+.astra-engine .astra-wiki__content a.astra-wiki__link,
+.astra-engine .astra-wiki__content a.astra-wiki__external {
+  border-bottom: 1px solid color-mix(in srgb, var(--astra-acento) 55%, transparent);
+  color: var(--astra-texto-titulo);
+  text-decoration: none;
+  text-shadow: none;
+  cursor: pointer;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+
+.astra-engine .astra-wiki__content a.astra-wiki__link[data-term] {
+  border-bottom-style: dotted;
+  color: inherit;
+}
+
+.astra-engine .astra-wiki__content strong a.astra-wiki__link[data-term] {
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__content a.astra-wiki__link:hover,
+.astra-engine .astra-wiki__content a.astra-wiki__external:hover {
+  border-bottom-color: var(--astra-acento);
+  border-bottom-style: solid;
+  color: #f3ad55;
+}
+
+.astra-engine .astra-wiki__content .astra-wiki__broken {
+  color: var(--astra-texto-secundario);
+}
+
+/* Citações */
+
+.astra-engine .astra-wiki__related {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--astra-borda-sutil);
+}
+
+.astra-engine .astra-wiki__related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.astra-engine .astra-wiki__related button {
+  width: auto;
+  height: 26px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid var(--astra-borda);
+  border-radius: var(--astra-canto-pilula);
+  background: var(--astra-superficie-elevada);
+  font-family: var(--astra-fonte-corpo);
+  font-size: 12px;
+  color: var(--astra-texto-base);
+  cursor: pointer;
+}
+
+.astra-engine .astra-wiki__related button:hover {
+  border-color: var(--astra-acento);
+  color: #f3ad55;
+}
+
+/* Prévia de link */
+
+.astra-engine .astra-wiki__preview {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 300px;
+  padding: 12px 14px;
+  border: 1px solid var(--astra-borda);
+  border-radius: var(--astra-canto-painel);
+  background: var(--astra-superficie-elevada);
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+.astra-engine .astra-wiki__preview[hidden] {
+  display: none;
+}
+
+.astra-engine .astra-wiki__preview-context {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--astra-acento);
+}
+
+.astra-engine .astra-wiki__preview-context:empty {
+  display: none;
+}
+
+.astra-engine .astra-wiki__preview-title {
+  font-size: 14px;
+  color: var(--astra-texto-titulo);
+}
+
+.astra-engine .astra-wiki__preview-summary {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--astra-texto-corpo);
+}
+
+/* Botão de abrir na aba de Configurações */
+
+.astra-wiki-open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.astra-engine .astra-wiki__field input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+/* Citações @Regra[...] em diários, fichas e chat */
+
+.astra-wiki-ref {
+  display: inline;
+  padding: 0 4px;
+  border: 1px solid var(--color-border-light-2, #7a7971);
+  border-radius: 3px;
+  background: var(--color-bg-option, rgba(0, 0, 0, 0.08));
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.astra-wiki-ref > i {
+  margin-right: 4px;
+  color: var(--color-text-accent, #ee9b3a);
+}
+
+.astra-wiki-ref.is-broken {
+  border-style: dashed;
+  opacity: 0.7;
+  cursor: help;
+}
